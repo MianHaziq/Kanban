@@ -1,1 +1,1 @@
-# Canban
+# Kanban
