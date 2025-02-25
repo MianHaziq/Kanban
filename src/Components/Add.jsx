@@ -14,10 +14,20 @@ function Add({ addTask }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newTask = { Title, Description, Status };
+  
 
+const newTask={
+    Title:Title,
+    Description:Description,
+    Status:Status
+}
+    
     addTask(newTask);
     setModal(false); 
+
+    setTitle("");
+    setDescription("");
+    setStatus("todo")
   };
 
   return (
@@ -101,9 +111,9 @@ function Add({ addTask }) {
                   onChange={(e) => setStatus(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 >
-                  <option value="todo">To-Do</option>
-                  <option value="progress">In Progress</option>
-                  <option value="done">Done</option>
+                  <option className="bg-blue-400" value="todo">To-Do</option>
+                  <option className="bg-yellow-400" value="progress">In Progress</option>
+                  <option className="bg-green-400" value="done">Done</option>
                 </select>
               </div>
 
