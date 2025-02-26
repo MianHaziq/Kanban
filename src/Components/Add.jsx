@@ -5,12 +5,14 @@ function Add({ addTask, editTask }) {
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [Status, setStatus] = useState("todo");
+  const [Priority, setPriority] = useState("High");
 
   useEffect(() => {
     if (editTask) {
       setTitle(editTask.Title);
       setDescription(editTask.Description);
       setStatus(editTask.Status);
+      setPriority(editTask.Priority);
       setModal(true);
     }
   }, [editTask]);
@@ -21,6 +23,7 @@ function Add({ addTask, editTask }) {
       setTitle("");
       setDescription("");
       setStatus("todo");
+      setPriority("High");
     }
   };
 
@@ -30,7 +33,8 @@ function Add({ addTask, editTask }) {
     const newTask = {
       Title:Title,
       Description:Description,
-      Status:Status
+      Status:Status,
+      Priority:Priority
     };
 
     addTask(newTask);
@@ -39,6 +43,7 @@ function Add({ addTask, editTask }) {
     setTitle("");
     setDescription("");
     setStatus("todo");
+    setPriority("High");
   };
 
   return (
@@ -107,6 +112,24 @@ function Add({ addTask, editTask }) {
                     placeholder="Write Task description"
                   ></textarea>
                 </div>
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <label
+                  htmlFor="priority"
+                  className="block mb-2 text-sm font-medium text-white dark:text-white"
+                >
+                  Priority
+                </label>
+                <select
+                  id="priority"
+                  value={Priority}
+                  onChange={(e) => setPriority(e.target.value)}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                >
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
               </div>
               <div className="col-span-2 sm:col-span-1">
                 <label

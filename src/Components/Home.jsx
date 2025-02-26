@@ -89,10 +89,26 @@ className={ `h-screen w-1/4 rounded-3xl p-4 ${status==="todo"?"bg-blue-600":stat
 >
   
 <h1 className="text-white text-center font-bold">{status==="todo"?"TODO":status==="progress"?"In Progress":"Done"}</h1>
-{tasks.filter((task)=>task.Status===status).map((task)=>(<Card
+
+{tasks.filter((task)=>task.Status===status && task.Priority==="High").map((task)=>(<Card
 key={task.Title}
 task={task} openEditModal={openEditModal} remove={remove}
 onDragStart={onDragStart} onDrop={onDrop} onDragOver={onDragOver}
+
+
+/>))}
+{tasks.filter((task)=>task.Status===status && task.Priority==="Medium").map((task)=>(<Card
+key={task.Title}
+task={task} openEditModal={openEditModal} remove={remove}
+onDragStart={onDragStart} onDrop={onDrop} onDragOver={onDragOver}
+
+
+/>))}
+{tasks.filter((task)=>task.Status===status && task.Priority==="Low").map((task)=>(<Card
+key={task.Title}
+task={task} openEditModal={openEditModal} remove={remove}
+onDragStart={onDragStart} onDrop={onDrop} onDragOver={onDragOver}
+
 
 />))}
 
