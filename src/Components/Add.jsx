@@ -1,33 +1,43 @@
+import React, { useState, useEffect } from "react";
 
-
-import React, { useState } from "react";
-
-function Add({ addTask }) {
+function Add({ addTask, editTask }) {
   const [isModalOpen, setModal] = useState(false);
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [Status, setStatus] = useState("todo"); 
+  const [Status, setStatus] = useState("todo");
+
+  useEffect(() => {
+    if (editTask) {
+      setTitle(editTask.Title);
+      setDescription(editTask.Description);
+      setStatus(editTask.Status);
+      setModal(true);
+    }
+  }, [editTask]);
 
   const toggle = () => {
     setModal(!isModalOpen);
+    if (!isModalOpen) {
+      setTitle("");
+      setDescription("");
+      setStatus("todo");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
 
-const newTask={
-    Title:Title,
-    Description:Description,
-    Status:Status
-}
-    
+    const newTask = {
+      Title:Title,
+      Description:Description,
+      Status:Status
+    };
+
     addTask(newTask);
-    setModal(false); 
-
+    setModal(false);
     setTitle("");
     setDescription("");
-    setStatus("todo")
+    setStatus("todo");
   };
 
   return (
@@ -35,7 +45,6 @@ const newTask={
       <button
         onClick={toggle}
         className="block text-white bg-blue-700 mt-5 ml-auto mr-10 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
       >
         Add
       </button>
@@ -50,7 +59,7 @@ const newTask={
           <div className="relative p-4 w-full max-w-md bg-slate-600 rounded-lg shadow dark:bg-gray-700">
             <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600 border-gray-200">
               <h3 className="text-lg font-semibold text-white dark:text-white">
-                Add New Task
+                {editTask ? "Edit Task" : "Add New Task"}
               </h3>
               <button
                 type="button"
@@ -111,9 +120,9 @@ const newTask={
                   onChange={(e) => setStatus(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 >
-                  <option className="bg-blue-400" value="todo">To-Do</option>
-                  <option className="bg-yellow-400" value="progress">In Progress</option>
-                  <option className="bg-green-400" value="done">Done</option>
+                  <option value="todo">To-Do</option>
+                  <option value="progress">In Progress</option>
+                  <option value="done">Done</option>
                 </select>
               </div>
 
@@ -121,7 +130,7 @@ const newTask={
                 type="submit"
                 className="text-white mt-4 inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700"
               >
-                Add Task
+                {editTask ? "Update Task" : "Add Task"}
               </button>
             </form>
           </div>
