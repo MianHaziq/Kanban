@@ -1,27 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import Add from "./Add";
 
 function Home() {
+
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
 
+  
+
   const addTask = (task) => {
     if (editTask) {
+
+
       setTasks(tasks.map((t) => (t.Title === editTask.Title ? task : t))); 
+
       setEditTask(null);
     } else {
       setTasks([...tasks, task]); 
+
     }
   };
+ 
+ 
 
-  const remove = (taskToRemove) => {
-    setTasks(tasks.filter((task) => task !== taskToRemove));
+
+  const remove = (del) => {
+    
+    const temp = tasks.filter((task) => task !== del);
+    setTasks(temp);
+    localStorage.setItem('tasks',JSON.stringify(temp));
+
   };
-
   const openEditModal = (task) => {
     setEditTask(task);
   };
+
+
+  useEffect(()=>{
+    if(tasks){
+   
+    const tasks=JSON.parse(localStorage.getItem('tasks'))
+    console.log(tasks);
+   if(tasks){
+      setTasks(tasks);
+   }
+  }
+  },[])
+  
+  useEffect(()=>{
+    if(tasks.length >0){
+    localStorage.setItem('tasks',JSON.stringify(tasks));
+    }
+  },[tasks]);
+
 
   return (
     <>
