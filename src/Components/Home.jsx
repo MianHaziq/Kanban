@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import Add from "./Add";
+import Card from "./Card";
 
 function Home() {
 
@@ -36,6 +37,21 @@ function Home() {
     setEditTask(task);
   };
 
+const onDragStart=(e,task)=>{
+e.dataTransfer.setData("tasks",JSON.stringify(task));
+}
+const onDragOver=(e)=>{
+  e.preventDefault();
+}
+
+const onDrop=(e,status)=>{
+  e.preventDefault();
+  const temp = JSON.parse(e.dataTransfer.getData("tasks"));
+  const temp1 = tasks.map((t) =>
+    t.Title === temp.Title ? { ...t, Status: status } : t
+  );
+  setTasks(temp1);
+};
 
   useEffect(()=>{
     if(tasks){
@@ -63,7 +79,27 @@ function Home() {
 
         <div className="flex justify-around mt-5">
        
-          <div className="bg-blue-600 h-screen w-1/4 rounded-3xl p-4">
+       {["todo","progress","done"].map((status)=>(
+<div 
+onDragOver={(e)=>onDragOver(e)}
+onDrop={(e)=>onDrop(e,status)}
+key={status}
+className={ `h-screen w-1/4 rounded-3xl p-4 ${status==="todo"?"bg-blue-600":status==="progress"?"bg-yellow-600":"bg-green-600"} `}
+
+>
+  
+<h1 className="text-white text-center font-bold">{status==="todo"?"TODO":status==="progress"?"In Progress":"Done"}</h1>
+{tasks.filter((task)=>task.Status===status).map((task)=>(<Card
+key={task.Title}
+task={task} openEditModal={openEditModal} remove={remove}
+onDragStart={onDragStart} onDrop={onDrop} onDragOver={onDragOver}
+
+/>))}
+
+</div>
+       ))};
+
+          {/* <div className="bg-blue-600 h-screen w-1/4 rounded-3xl p-4">
             <h1 className="text-white text-center font-bold">TO-DO</h1>
             {tasks
               .filter((task) => task.Status === "todo")
@@ -134,7 +170,9 @@ function Home() {
                   </button>
                 </div>
               ))}
-          </div>
+          </div> */}
+
+          
         </div>
       </div>
     </>
