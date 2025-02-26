@@ -34,6 +34,7 @@ function Add({ addTask, editTask }) {
     };
 
     addTask(newTask);
+
     setModal(false);
     setTitle("");
     setDescription("");
