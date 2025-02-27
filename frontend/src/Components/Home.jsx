@@ -26,7 +26,7 @@ function Home() {
     setEditTask(task);
   };
 
-  // Drag Functions
+
   const onDragStart = (e, task, index) => {
     e.dataTransfer.setData("task", JSON.stringify(task));
     e.dataTransfer.setData("index", index);
@@ -46,13 +46,12 @@ function Home() {
 
     let updatedTasks = [...tasks];
 
-    // Remove the task from its original position
+
     updatedTasks = updatedTasks.filter((t) => t.Title !== draggedTask.Title);
 
-    // Update the task's status
+    
     draggedTask.Status = targetStatus;
 
-    // Insert the task at the new position
     updatedTasks.splice(targetIndex, 0, draggedTask);
 
     setTasks(updatedTasks);
