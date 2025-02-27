@@ -73,7 +73,7 @@ const onDrop=(e,status)=>{
 
   return (
     <>
-      <div className="bg-slate-900 h-screen w-screen">
+      <div className="mb-10">
         <Nav />
         <Add addTask={addTask}  editTask={editTask}/>
 
@@ -84,7 +84,7 @@ const onDrop=(e,status)=>{
 onDragOver={(e)=>onDragOver(e)}
 onDrop={(e)=>onDrop(e,status)}
 key={status}
-className={ `h-screen w-1/4 rounded-3xl p-4 ${status==="todo"?"bg-blue-600":status==="progress"?"bg-yellow-600":"bg-green-600"} `}
+className={ `h-auto w-1/4 rounded-3xl p-4 ${status==="todo"?"bg-blue-600":status==="progress"?"bg-yellow-600":"bg-green-600"} `}
 
 >
   
