@@ -13,6 +13,7 @@ const createUser = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(Password, 10);
         const newUser = new userModel({ Username, Password: hashedPassword });
 
+        
         await newUser.save();
         res.status(201).json(newUser);
     } catch (error) {
