@@ -31,9 +31,7 @@ const Signup = async (req, res, next) => {
             return res.status(400).json({ message: "Username and Password are required" });
         }
 
-        if (typeof Password !== "string") {
-            return res.status(400).json({ message: "Password must be a string" });
-        }
+       
 
         const hashedPassword = await bcrypt.hash(Password, 10);
         const newUser = new userModel({ Username, Password: hashedPassword });
