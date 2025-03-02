@@ -1,13 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors=require('cors');
 const user_router=require('./Routes/user')
 const auth_router=require('./routes/auth')
 const task_router=require('./routes/task')
 
+
 const app=express();
 
 
-
+app.use(cors());
 
 app.use(express.json());
 

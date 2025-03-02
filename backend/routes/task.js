@@ -4,8 +4,9 @@ const authorization = require("../middleware/authorization");
 const router = express.Router();
 
 router.post("/create",authorization,  createTask);
-router.get("/get",  readTask);
+router.get("/",authorization,  readTask);
 router.patch("/update/:id",authorization,  updateTask);
 router.delete("/delete/:id",authorization,  deleteTask);
+
 
 module.exports = router;
