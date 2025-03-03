@@ -55,7 +55,7 @@ function Login() {
         <hr className="my-6 border-gray-300 w-full" />
           <p className="mt-8">
                         Dont have an account? {}
-                        <Link to="/signup"  className="text-blue-500 hover:text-blue-700 font-semibold" >Signup</Link>
+                        <Link to="/"  className="text-blue-500 hover:text-blue-700 font-semibold" >Signup</Link>
                        
                     </p>
         <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg px-4 py-3 mt-6">

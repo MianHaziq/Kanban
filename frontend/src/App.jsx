@@ -21,7 +21,7 @@ function App() {
           
        
       
-          <Route path="*" element={<h1 className="text-center text-red-500">404 - Page Not Found</h1>} />
+          <Route path="*" element={<h1 className="text-center text-red-700">404 ErrrroR</h1>} />
         </Routes>
       </Router>
     </div>
