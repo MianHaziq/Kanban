@@ -15,7 +15,7 @@ const login = async (req, res, next) => {
         if (!isMatch) {
             return res.status(401).json({ message: "Incorrect Username or Password" });
         }
-        const accessToken = jwt.sign({ Username: user.Username, id: user._id }, 'secret');
+        const accessToken = jwt.sign({ Username: user.Username, id: user._id }, 'secret',{ expiresIn: '1h'});
         return res.status(200).json({ accessToken, message: "Login Success" });
     } catch (error) {
         next(error);

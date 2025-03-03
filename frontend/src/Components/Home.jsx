@@ -3,6 +3,7 @@ import axios from "axios";
 import Nav from "./Nav";
 import Add from "./Add";
 import Card from "./Card";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
@@ -54,6 +55,12 @@ function Home() {
       console.error("Error while the deleting task", error);
     }
   };
+const navigate=useNavigate();
+  const logout = async () => {
+   localStorage.removeItem('token');
+
+   navigate('/login');
+  };
 
   const openEditModal = (task) => {
     setEditTask(task);
@@ -88,8 +95,10 @@ function Home() {
     <>
       <div className="mb-10">
         <Nav  />
-        <Add addTask={addTask} editTask={editTask} />
 
+        <Add addTask={addTask} editTask={editTask} />
+            <button onClick={logout} className="bg-red-700 text-white text-xl p-2 rounded-xl shadow-2xl my-2 transition-all duration-300
+          hover:scale-105 hover:shadow-2xl">Logout</button>
         <div className="flex justify-around mt-5">
           {["todo", "progress", "done"].map((status) => (
             <div

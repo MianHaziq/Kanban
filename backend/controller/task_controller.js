@@ -44,9 +44,9 @@ const updateTask = async (req, res, next) => {
         }
 
       
-        if (task.Userid.toString() !== Userid) {
-            return res.status(403).json({ message: " You can only update your own tasks" });
-        }
+        // if (task.Userid.toString() !== Userid) {
+        //     return res.status(403).json({ message: " You can only update your own tasks" });
+        // }
 
         const updatedTask = await TaskModel.findByIdAndUpdate(
             id,
@@ -81,9 +81,9 @@ const deleteTask = async (req, res, next) => {
         }
 
         
-        if (task.Userid.toString() !== Userid) {
-            return res.status(403).json({ message: "You can only delete your own tasks" });
-        }
+        // if (task.Userid.toString() !== Userid) {
+        //     return res.status(403).json({ message: "You can only delete your own tasks" });
+        // }
 
         await TaskModel.findByIdAndDelete(id);
 

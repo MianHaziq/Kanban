@@ -34,24 +34,10 @@
         Status,
       };
     
-      try {
-        const token = localStorage.getItem("token"); 
-    
-        if (editTask) {
-          const response = await axios.patch(`http://localhost:3002/task/update/${editTask._id}`, newTask, {
-            headers: { Authorization: `Bearer ${token}` }, 
-          });
-          addTask(response.data);
-        } else {
-          const response = await axios.post("http://localhost:3002/task/create", newTask, {
-            headers: { Authorization: `Bearer ${token}` }, 
-          });
-          addTask(response.data);
-        }
+     
+          addTask(newTask);
         
-      } catch (error) {
-        console.error("Error saving task:", error);
-      }
+      
   
 
       setModal(false);
