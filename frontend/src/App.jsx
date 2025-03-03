@@ -4,6 +4,7 @@ import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 
+
 function App() {
   const token = localStorage.getItem("token"); 
 
@@ -12,12 +13,13 @@ function App() {
       <Router>
         <Routes>
       
-          <Route path="/" element={token ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Signup />} />
+          <Route path="/home" element={token ? <Home /> : <Navigate to="/login" />} />
 
         
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-
+          
+       
       
           <Route path="*" element={<h1 className="text-center text-red-500">404 - Page Not Found</h1>} />
         </Routes>
