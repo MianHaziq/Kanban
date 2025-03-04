@@ -4,7 +4,7 @@ const cors=require('cors');
 const user_router=require('./Routes/user')
 const auth_router=require('./routes/auth')
 const task_router=require('./routes/task')
-
+const log_router=require('./routes/logger')
 
 
 const app=express();
@@ -22,10 +22,11 @@ mongoose.connect("mongodb://localhost:27017/Kanban")
 
 
 app.use('/auth', auth_router);
+app.use('/log', log_router);
 app.use('/user', user_router);
 app.use('/task', task_router);
 
-const PORT = 3002;
+const PORT = 3003;
 app.listen(PORT, () => {
     console.log(`Server Started on Port ${PORT}`);
 });

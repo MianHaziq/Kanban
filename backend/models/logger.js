@@ -23,7 +23,7 @@ action:{
     type:String,
     enum: ["create", "update", "delete"] 
 },
-time:{
+createdat:{
 type:Date,
 default:Date.now()
 

@@ -10,7 +10,7 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3002/auth/signup", {
+      await axios.post("http://localhost:3003/auth/signup", {
         Username: username,
         Password: password,
       });
@@ -23,9 +23,9 @@ function Signup() {
   };
 
   return (
-    <section className="flex h-screen items-center justify-center bg-blue-900">
+    <section className="flex h-screen items-center justify-center bg-slate-800">
       <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
-      <h1 className="text-blue-900 text-center text-2xl font-extrabold">KanBan</h1>
+      <h1 className="text-slate-800 text-center text-2xl font-extrabold">KanBan</h1>
         <h2 className="text-xl font-bold mt-6 text-center">Signup</h2>
         <form className="mt-6" onSubmit={handleSignup}>
           <div>
@@ -53,10 +53,10 @@ function Signup() {
           <hr className="my-6 border-gray-300 w-full" />
           <p className="mt-8">
                         Already have an account? {}
-                        <Link to="/login"  className="text-blue-500 hover:text-blue-700 font-semibold" >Login</Link>
+                        <Link to="/login"  className="text-slate-500 hover:text-slate-700 font-semibold" >Login</Link>
                        
                     </p>
-          <button type="submit" className="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6">
+          <button type="submit" className="w-full bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-lg px-4 py-3 mt-6">
             Signup
           </button>
         </form>

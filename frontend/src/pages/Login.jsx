@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate ,Link} from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 function Login() {
   const [username, setUsername] = useState("");
@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3002/auth/login", {
+      const response = await axios.post("http://localhost:3003/auth/login", {
         Username: username,
         Password: password,
       });
@@ -27,9 +27,9 @@ function Login() {
   };
 
   return (
-    <section className="flex h-screen items-center justify-center bg-blue-900">
+    <section className="flex h-screen items-center justify-center bg-slate-800">
     <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
-      <h1 className="text-blue-900 text-center text-2xl font-extrabold">KanBan</h1>
+      <h1 className="text-slate-800 text-center text-2xl font-extrabold">KanBan</h1>
       <h2 className="text-xl font-bold mt-6 text-center">Login</h2>
       <form className="mt-6" onSubmit={handleLogin}>
         <div>
@@ -57,10 +57,10 @@ function Login() {
         <hr className="my-6 border-gray-300 w-full" />
           <p className="mt-8">
                         Dont have an account? {}
-                        <Link to="/"  className="text-blue-500 hover:text-blue-700 font-semibold" >Signup</Link>
+                        <Link to="/"  className="text-slate-500 hover:text-slate-700 font-semibold" >Signup</Link>
                        
                     </p>
-        <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg px-4 py-3 mt-6">
+        <button type="submit" className="w-full bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-lg px-4 py-3 mt-6">
           Login
         </button>
       </form>

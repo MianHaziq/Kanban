@@ -36,14 +36,12 @@
     
      
           addTask(newTask);
-        
-      
-  
-
       setModal(false);
       setTitle("");
       setDescription("");
       setStatus("todo");
+
+
     };
 
     return (

@@ -1,10 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./Components/Home";
-import Login from "./Components/Login";
-import Signup from "./Components/Signup";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
-import { AuthProvider } from "./Context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
+import Activity_Log from "./pages/Activity_Log";
 function App() {
   const token = localStorage.getItem("token"); 
 
@@ -20,7 +21,7 @@ function App() {
         
           <Route path="/login" element={<Login />} />
           
-       
+       <Route path="/log" element={<Activity_Log/>} />
       
           <Route path="*" element={<h1 className="text-center text-red-500">404 - Page Not Found</h1>} />
         </Routes>

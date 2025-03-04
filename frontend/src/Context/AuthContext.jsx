@@ -20,12 +20,16 @@ function AuthProvider(props) {
     setToken(jwtToken);
   };
 
- 
+  const logout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
+
 
   const value = {
     token,
     login,
-
+    logout,
   };
 
   return <AuthContext.Provider value={value} {...props} />;

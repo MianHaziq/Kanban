@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import Nav from "./Nav";
-import Add from "./Add";
-import Card from "./Card";
-import { useNavigate } from "react-router-dom";
+import Nav from "../components/Nav";
+import Add from "../Components/Add";
+import Card from "../Components/Card";
+import { useNavigate ,Link} from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
   const token = localStorage.getItem("token"); 
-
+const {logout}=useContext(AuthContext);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/task/", {
+        const response = await axios.get("http://localhost:3003/task/", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTasks(response.data);
@@ -29,12 +30,12 @@ function Home() {
   const addTask = async (task) => {
     try {
       if (editTask) {
-        const response = await axios.patch(`http://localhost:3002/task/update/${editTask._id}`, task, {
+        const response = await axios.patch(`http://localhost:3003/task/update/${editTask._id}`, task, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTasks(tasks.map((t) => (t._id === editTask._id ? response.data : t)));
       } else {
-        const response = await axios.post("http://localhost:3002/task/create/", task, {
+        const response = await axios.post("http://localhost:3003/task/create/", task, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTasks([...tasks, response.data]);
@@ -47,7 +48,7 @@ function Home() {
 
   const remove = async (taskToDelete) => {
     try {
-      await axios.delete(`http://localhost:3002/task/delete/${taskToDelete._id}`, {
+      await axios.delete(`http://localhost:3003/task/delete/${taskToDelete._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(tasks.filter((task) => task._id !== taskToDelete._id));
@@ -56,12 +57,18 @@ function Home() {
     }
   };
 const navigate=useNavigate();
-  const logout = async () => {
-   localStorage.removeItem('token');
+
+  const handlelogout = async () => {
+   logout();
 
    navigate('/login');
   };
-
+  const handleActivityLogs = async () => {
+ 
+ 
+    navigate('/log');
+   };
+ 
   const openEditModal = (task) => {
     setEditTask(task);
   };
@@ -81,7 +88,7 @@ const navigate=useNavigate();
     if (dragtask.Status !== targetStatus) {
       try {
         const updatedTask = { ...dragtask, Status: targetStatus };
-        const response = await axios.patch(`http://localhost:3002/task/update/${dragtask._id}`, updatedTask, {
+        const response = await axios.patch(`http://localhost:3003/task/update/${dragtask._id}`, updatedTask, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setTasks(tasks.map((task) => (task._id === dragtask._id ? response.data : task)));
@@ -97,8 +104,13 @@ const navigate=useNavigate();
         <Nav  />
 
         <Add addTask={addTask} editTask={editTask} />
-            <button onClick={logout} className="bg-red-700 text-white text-xl p-2 rounded-xl shadow-2xl my-2 transition-all duration-300
-          hover:scale-105 hover:shadow-2xl">Logout</button>
+        <div className="flex justify-end mr-10">
+        <button onClick={handleActivityLogs} className="block text-white bg-orange-700 mt-5  mr-10 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">Activity Log</button>
+
+            <button onClick={handlelogout} className="block text-white bg-red-700 mt-5  mr-10 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Logout</button>
+        
+          </div>
+
         <div className="flex justify-around mt-5">
           {["todo", "progress", "done"].map((status) => (
             <div
