@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate ,Link} from "react-router-dom";
+import { signup } from "../services/authService";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -10,15 +11,12 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3003/auth/signup", {
-        Username: username,
-        Password: password,
-      });
+      await signup(username,password);
      
       navigate("/login");
     } catch (error) {
-      console.error("Signup failed:", error);
-      alert("Signup failed. Try again.");
+      console.error("Signup failed !", error);
+      alert("Signup failed - Try again!!!");
     }
   };
 

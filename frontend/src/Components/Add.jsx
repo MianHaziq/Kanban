@@ -58,7 +58,7 @@
             id="crud-modal"
             tabIndex="-1"
             aria-hidden="true"
-            className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
+            className="fixed inset-0 z-50 flex items-center flex-wrap justify-center w-full h-full bg-black bg-opacity-50"
           >
             <div className="relative p-4 w-full max-w-md bg-slate-600 rounded-lg shadow dark:bg-gray-700">
               <div className="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600 border-gray-200">
