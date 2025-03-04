@@ -22,7 +22,7 @@ function Card({ task, index, openEditModal, remove, onDragStart }) {
         <h2 className="font-bold">{task.Title}</h2>
         <p>{task.Description}</p>
 
-        <div className="flex justify-around mt-2">
+        <div className="flex flex-wrap justify-around mt-2">
           <button
             onClick={() => openEditModal(task)}
             className="bg-yellow-700 text-white text-xl p-2 rounded-xl shadow-2xl my-2 transition-all duration-300
