@@ -4,7 +4,7 @@ import Nav from "../Components/Nav";
 import Add from "../Components/Add";
 import Card from "../Components/Card";
 import { AuthContext } from "../Context/AuthContext";
-import { fetchTasks, addOrUpdateTask, removeTask, updateTaskStatus } from "../services/taskservice";
+import { fetchTasks, addOrUpdateTask, removeTask, updateTaskStatus } from "../services/taskService";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
