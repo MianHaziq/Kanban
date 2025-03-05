@@ -4,6 +4,10 @@ const LogModel = require("../models/logger");
 const createTask = async (req, res, next) => {
     try {
         const { Title, Description, Status } = req.body;
+        if (!Title || !Description || !Status) {
+            return res.status(400).json({ message: " All Inputs Required" });
+        }
+
         const Userid = req.user.id; 
 
         const newTask = new TaskModel({ Title, Description, Status, Userid });

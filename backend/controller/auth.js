@@ -5,6 +5,10 @@ const bcrypt = require("bcrypt");
 const login = async (req, res, next) => {
     try {
         const { Username, Password } = req.body;
+        if (!Username || !Password) {
+            return res.status(400).json({ message: "username & password required" });
+        }
+
         const user = await userModel.findOne({ Username });
         if (!user) {
             return res.status(404).json({ message: "User Does Not Exist" });

@@ -5,7 +5,7 @@ const user_router=require('./Routes/user')
 const auth_router=require('./routes/auth')
 const task_router=require('./routes/task')
 const log_router=require('./routes/logger')
-
+require('dotenv').config();
 
 const app=express();
 
@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 
-mongoose.connect("mongodb://localhost:27017/Kanban")
+mongoose.connect(process.env.DB_URL)
 
 
 
@@ -26,9 +26,9 @@ app.use('/log', log_router);
 app.use('/user', user_router);
 app.use('/task', task_router);
 
-const PORT = 3003;
-app.listen(PORT, () => {
-    console.log(`Server Started on Port ${PORT}`);
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server Started on Port ${process.env.PORT}`);
 });
 
 
