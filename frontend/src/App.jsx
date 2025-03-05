@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { AuthProvider, AuthContext } from "./context/AuthContext";
+import { AuthProvider, AuthContext } from "./Context/AuthContext";
 import Activity_Log from "./pages/Activity_Log";
 import { useContext } from "react";
 
