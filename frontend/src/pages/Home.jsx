@@ -37,12 +37,13 @@ function Home() {
 
   const remove = async (taskToDelete) => {
     try {
+      setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskToDelete._id));   
       await removeTask(taskToDelete._id, token);
-      setTasks(tasks.filter((task) => task._id !== taskToDelete._id));
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   const handleLogout = () => {
     logout();
