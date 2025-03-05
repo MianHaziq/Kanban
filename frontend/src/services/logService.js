@@ -1,4 +1,3 @@
-// services/authService.js
 import axios from "axios";
 
 const Base_url = "http://localhost:3003/log/";
