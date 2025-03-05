@@ -24,6 +24,9 @@ const createUser = async (req, res, next) => {
 const readUser = async (req, res, next) => {
     try {
         const users = await userModel.find();
+        if (!users) {
+            return res.status(404).json({ message: "No Users" });
+        }
         res.json(users);
     } catch (error) {
         next(error);
