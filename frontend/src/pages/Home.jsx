@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Nav from "../components/Nav";
+import Nav from "../Components/Nav";
 import Add from "../Components/Add";
 import Card from "../Components/Card";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 import { fetchTasks, addOrUpdateTask, removeTask, updateTaskStatus } from "../services/taskservice";
 
 function Home() {
