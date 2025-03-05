@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Log_Card from "../components/LogTable";
+import Log_Card from "../Components/LogTable";
 import { fetchData } from "../services/logService";
 
 function Activity_Log() {
