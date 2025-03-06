@@ -1,21 +1,24 @@
-
 const userModel = require("../Models/user");
 const bcrypt = require("bcrypt");
 
 const createUser = async (req, res, next) => {
     try {
-        const { username, password } = req.body; 
+        const { email, username, password } = req.body; 
 
-        if (!username || !password) {
-            return res.status(400).json({ message: "username & password required" });
+        if (!email || !username || !password) {
+            return res.status(400).json({ message: "Email, username, and password are required" });
         }
 
-        const hashedpassword = await bcrypt.hash(password, 10);
-        const newUser = new userModel({ username, password: hashedpassword });
+        const existingUser = await userModel.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "Email already in use" });
+        }
 
-        
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = new userModel({ email, username, password: hashedPassword });
+
         await newUser.save();
-        res.status(201).json(newUser);
+        res.status(201).json({ message: "User created successfully", newUser });
     } catch (error) {
         next(error);
     }
@@ -24,7 +27,7 @@ const createUser = async (req, res, next) => {
 const readUser = async (req, res, next) => {
     try {
         const users = await userModel.find();
-        if (!users) {
+        if (!users || users.length === 0) {
             return res.status(404).json({ message: "No Users" });
         }
         res.json(users);
@@ -39,10 +42,10 @@ const readUserId = async (req, res, next) => {
         const userData = await userModel.findById(id);
 
         if (!userData) {
-            res.status(404).json({ message: "User not found" });
-        } else {
-            res.json(userData);
-        }
+            return res.status(404).json({ message: "User not found" });
+        } 
+        res.json(userData);
+        
     } catch (error) {
         next(error);
     }
@@ -51,15 +54,26 @@ const readUserId = async (req, res, next) => {
 const updateUser = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const updatedUser = await userModel.findByIdAndUpdate(id, req.body, {
-            new: true,
-        });
+        const { email, username, password } = req.body;
+
+        let updatedData = {};
+        if (email) {
+            const existingUser = await userModel.findOne({ email });
+            if (existingUser && existingUser._id.toString() !== id) {
+                return res.status(400).json({ message: "Email already in use" });
+            }
+            updatedData.email = email;
+        }
+        if (username) updatedData.username = username;
+        if (password) updatedData.password = await bcrypt.hash(password, 10);
+
+        const updatedUser = await userModel.findByIdAndUpdate(id, updatedData, { new: true });
 
         if (!updatedUser) {
-            res.status(404).json({ message: "User not found" });
-        } else {
-            res.json({ message: "Updated Successfully", updatedUser });
-        }
+            return res.status(404).json({ message: "User not found" });
+        } 
+        res.json({ message: "Updated Successfully", updatedUser });
+
     } catch (error) {
         next(error);
     }
@@ -71,10 +85,10 @@ const deleteUserbyid = async (req, res, next) => {
         const deletedUser = await userModel.findByIdAndDelete(id);
 
         if (!deletedUser) {
-            res.status(404).json({ message: "User not found" });
-        } else {
-            res.json({ message: "User deleted", deletedUser });
-        }
+            return res.status(404).json({ message: "User not found" });
+        } 
+        res.json({ message: "User deleted", deletedUser });
+
     } catch (error) {
         next(error);
     }

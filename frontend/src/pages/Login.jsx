@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { login } from "../services/authService";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login: authLogin } = useContext(AuthContext);
@@ -12,12 +12,12 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const token = await login(username, password);
+      const token = await login(email, password);
       authLogin(token);
-      alert("login successfully");
+      alert("Login successfully");
       navigate("/home");
     } catch (error) {
-      alert("Invalid credentials  Try again!");
+      alert("Invalid credentials. Try again!");
     }
   };
 
@@ -28,13 +28,13 @@ function Login() {
         <h2 className="text-xl font-bold mt-6 text-center">Login</h2>
         <form className="mt-6" onSubmit={handleLogin}>
           <div>
-            <label className="block text-gray-700 font-semibold">Username</label>
+            <label className="block text-gray-700 font-semibold">Email</label>
             <input
-              type="text"
-              placeholder="Enter Username"
+              type="email"
+              placeholder="Enter Email"
               className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>

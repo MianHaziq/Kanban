@@ -1,9 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate ,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signup } from "../services/authService";
 
 function Signup() {
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -11,11 +11,11 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await signup(username,password);
-      alert("signup successfully");
+      await signup(email, username, password);
+      alert("Signup successfully");
       navigate("/login");
     } catch (error) {
-      console.error("Signup failed !", error);
+      console.error("Signup failed!", error);
       alert("Signup failed - Try again!!!");
     }
   };
@@ -23,10 +23,21 @@ function Signup() {
   return (
     <section className="flex h-screen items-center justify-center bg-slate-800">
       <div className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
-      <h1 className="text-slate-800 text-center text-2xl font-extrabold">KanBan</h1>
+        <h1 className="text-slate-800 text-center text-2xl font-extrabold">KanBan</h1>
         <h2 className="text-xl font-bold mt-6 text-center">Signup</h2>
         <form className="mt-6" onSubmit={handleSignup}>
           <div>
+            <label className="block text-gray-700">Email</label>
+            <input
+              type="email"
+              placeholder="Enter Email"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mt-4">
             <label className="block text-gray-700">Username</label>
             <input
               type="text"
@@ -51,10 +62,8 @@ function Signup() {
           </div>
           <hr className="my-6 border-gray-300 w-full" />
           <p className="mt-8">
-                        Already have an account? {}
-                        <Link to="/login"  className="text-slate-500 hover:text-slate-700 font-semibold" >Login</Link>
-                       
-                    </p>
+            Already have an account? <Link to="/login" className="text-slate-500 hover:text-slate-700 font-semibold">Login</Link>
+          </p>
           <button type="submit" className="w-full bg-slate-600 hover:bg-slate-500 text-white font-semibold rounded-lg px-4 py-3 mt-6">
             Signup
           </button>
