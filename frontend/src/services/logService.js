@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Base_url = "http://localhost:3003/log/";
+const Base_url = "http://localhost:3003/log";
 
 export  const fetchData = async () => {
     try {

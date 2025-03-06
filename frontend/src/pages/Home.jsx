@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Nav from "../Components/Nav";
-import Add from "../Components/Add";
-import Card from "../Components/Card";
-import { AuthContext } from "../Context/AuthContext";
+import Nav from "../components/Nav";
+import Add from "../components/Add";
+import Card from "../components/Card";
+import { AuthContext } from "../context/AuthContext";
 import { fetchTasks, addOrUpdateTask, removeTask, updateTaskStatus } from "../services/taskService";
 
 function Home() {
   const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
+  const { token } = useContext(AuthContext);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -39,6 +40,7 @@ function Home() {
     try {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== taskToDelete._id));   
       await removeTask(taskToDelete._id, token);
+      
     } catch (error) {
       console.error(error);
     }
