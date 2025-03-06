@@ -9,11 +9,7 @@ function Card({ task, index, openEditModal, remove, onDragStart }) {
         onDragStart={(e) => onDragStart(e, task, index)}
         className={`
           ${
-            task.Status === 'todo'
-              ? 'bg-blue-400'
-              : task.Status === 'progress'
-              ? 'bg-yellow-400'
-              : 'bg-green-400'
+            task.Status === 'todo'  ? 'bg-blue-400' : task.Status === 'progress'? 'bg-yellow-400' : 'bg-green-400'
           }
           p-4 rounded-lg shadow-md my-2 transition-all duration-300
           hover:scale-105 hover:shadow-xl

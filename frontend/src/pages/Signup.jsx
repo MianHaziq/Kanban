@@ -12,7 +12,7 @@ function Signup() {
     e.preventDefault();
     try {
       await signup(username,password);
-     
+      alert("signup successfully");
       navigate("/login");
     } catch (error) {
       console.error("Signup failed !", error);
@@ -41,6 +41,7 @@ function Signup() {
             <label className="block text-gray-700">Password</label>
             <input
               type="password"
+              minLength="6"
               placeholder="Enter Password"
               className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
               value={password}

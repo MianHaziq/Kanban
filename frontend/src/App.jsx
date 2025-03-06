@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { AuthProvider, AuthContext } from "./Context/AuthContext";
-import Activity_Log from "./pages/Activity_Log";
+import { AuthProvider, AuthContext } from "./context/AuthContext";    
+import Activity_Log from "./pages/ActivityLog";
 import { useContext } from "react";
 
 function App() {
@@ -28,7 +28,7 @@ function AppRoutes() {
       <Route path="/home" element={token ? <Home /> : <Navigate to="/login" />} />
       <Route path="/login" element={token ? <Navigate to="/home" /> : <Login />} />
       <Route path="/log" element={token ? <Activity_Log /> : <Navigate to="/login" />} />
-      <Route path="*" element={<h1 className="text-center text-red-500">404 - Page Not Found</h1>} />
+      <Route path="*" element={<h1 className="text-center text-red-500">404 Page Not Found!</h1>} />
     </Routes>
   );
 }

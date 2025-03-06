@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Log_Card from "../Components/LogTable";
+import Log_Card from "../components/LogTable";
 import { fetchData } from "../services/logService";
 
-function Activity_Log() {
+function ActivityLog() {
   const [log, setLog] = useState([]); 
 
   useEffect(() => {
@@ -40,4 +40,4 @@ setLog(response);
   );
 }
 
-export default Activity_Log;
+export default ActivityLog;
