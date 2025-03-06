@@ -46,7 +46,7 @@ export const removeTask = async (taskId, token) => {
 
 export const updateTaskStatus = async (task, status, token) => {
   try {
-    const updatedTask = { ...task, Status: status };
+    const updatedTask = { ...task, status: status };
     const response = await axios.patch(`${Base_url}/update/${task._id}`, updatedTask, {
       headers: { Authorization: `Bearer ${token}` },
     });

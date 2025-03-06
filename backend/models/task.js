@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
-    Title: { 
+    title: { 
         type: String, 
         required: true },
-    Description: { 
+    description: { 
         type: String 
 
     },
-    Status: {   
+    status: {   
         type: String,
          required: true,
           enum: ["todo", "progress", "done"] },

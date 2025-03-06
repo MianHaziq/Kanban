@@ -71,7 +71,7 @@ function Home() {
   const onDrop = async (e, targetStatus) => {
     e.preventDefault();
     const draggedTask = JSON.parse(e.dataTransfer.getData("task"));
-    if (draggedTask.Status !== targetStatus) {
+    if (draggedTask.status !== targetStatus) {
       try {
         const updatedTask = await updateTaskStatus(draggedTask, targetStatus, token);
         setTasks(tasks.map((task) => (task._id === draggedTask._id ? updatedTask : task)));
@@ -104,7 +104,7 @@ function Home() {
               <h1 className="text-white text-center font-bold">
                 {status === "todo" ? "TODO" : status === "progress" ? "In Progress" : "Done"}
               </h1>
-              {tasks.filter((task) => task.Status === status).map((task, index) => (
+              {tasks.filter((task) => task.status === status).map((task, index) => (
                 <Card
                   key={task._id}
                   index={index}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Log_Card from "../components/LogTable";
 import { fetchData } from "../services/logService";
 

@@ -1,7 +1,7 @@
 const express=require("express")
 const router=express.Router();
 
-const{createUser,readUser,readUserId,updateUser,deleteUserbyid}=require('../controller/user_controller')
+const{createUser,readUser,readUserId,updateUser,deleteUserbyid}=require('../controller/userController')
 
 
 

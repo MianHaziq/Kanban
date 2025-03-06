@@ -1,17 +1,16 @@
   import React, { useState, useEffect } from "react";
-  import axios from "axios";
 
   function Add({ addTask, editTask }) {
     const [isModalOpen, setModal] = useState(false);
-    const [Title, setTitle] = useState("");
-    const [Description, setDescription] = useState("");
-    const [Status, setStatus] = useState("todo");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [status, setStatus] = useState("todo");
 
     useEffect(() => {
       if (editTask) {
-        setTitle(editTask.Title);
-        setDescription(editTask.Description);
-        setStatus(editTask.Status);
+        setTitle(editTask.title);
+        setDescription(editTask.description);
+        setStatus(editTask.status);
         setModal(true);
       }
     }, [editTask]);
@@ -29,9 +28,9 @@
       e.preventDefault();
 
       const newTask = {
-        Title,
-        Description,
-        Status,
+        title,
+        description,
+        status,
       };
     
      
@@ -86,7 +85,7 @@
                     <input
                       type="text"
                       id="title"
-                      value={Title}
+                      value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Write Title"
@@ -104,7 +103,7 @@
                     <textarea
                       id="description"
                       rows="4"
-                      value={Description}
+                      value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                       placeholder="Write Task description"
@@ -121,7 +120,7 @@
                   </label>
                   <select
                     id="status"
-                    value={Status}
+                    value={status}
                     onChange={(e) => setStatus(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   >

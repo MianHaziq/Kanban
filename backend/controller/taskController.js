@@ -1,23 +1,23 @@
-const TaskModel = require("../models/task");
-const LogModel = require("../models/logger");
+const taskModel = require("../models/task");
+const logModel = require("../models/logger");
 
 const createTask = async (req, res, next) => {
     try {
-        const { Title, Description, Status } = req.body;
-        if (!Title || !Description || !Status) {
+        const { title, description, status } = req.body;
+        if (!title || !description || !status) {
             return res.status(400).json({ message: " All Inputs Required" });
         }
 
         const Userid = req.user.id; 
 
-        const newTask = new TaskModel({ Title, Description, Status, Userid });
+        const newTask = new taskModel({ title, description, status, Userid });
         await newTask.save();
 
-        const log = new LogModel({
-            createdby: Userid,
+        const log = new logModel({
+            createdBy: Userid,
             taskid: newTask._id,
-            oldstatus: null,
-            newstatus: Status,
+            oldStatus: null,
+            newStatus: status,
             action: "create"
         });
         await log.save();
@@ -30,7 +30,7 @@ const createTask = async (req, res, next) => {
 
 const readTask = async (req, res, next) => {
     try {
-        const tasks = await TaskModel.find().populate('Userid'); 
+        const tasks = await taskModel.find().populate('Userid'); 
         res.status(200).json(tasks);
     } catch (error) {
         next(error);
@@ -39,10 +39,10 @@ const readTask = async (req, res, next) => {
 const updateTask = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { Title, Description, Status } = req.body;
+        const { title, description, status } = req.body;
         const Userid = req.user.id; 
 
-        const task = await TaskModel.findById(id);
+        const task = await taskModel.findById(id);
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
@@ -52,18 +52,18 @@ const updateTask = async (req, res, next) => {
         //     return res.status(403).json({ message: " You can only update your own tasks" });
         // }
 
-        const updatedTask = await TaskModel.findByIdAndUpdate(
+        const updatedTask = await taskModel.findByIdAndUpdate(
             id,
-            { Title, Description, Status },
+            { title, description, status },
             { new: true }
         );
 
         if (updatedTask) {
-            const log = new LogModel({
-                createdby: Userid,
+            const log = new logModel({
+                createdBy: Userid,
                 taskid: updatedTask._id,
-                oldstatus: task.Status,
-                newstatus: Status,
+                oldStatus: task.status,
+                newStatus: status,
                 action: "update"
             });
             await log.save();
@@ -79,7 +79,7 @@ const deleteTask = async (req, res, next) => {
         const { id } = req.params;
         const Userid = req.user.id; 
 
-        const task = await TaskModel.findById(id);
+        const task = await taskModel.findById(id);
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
@@ -89,13 +89,13 @@ const deleteTask = async (req, res, next) => {
         //     return res.status(403).json({ message: "You can only delete your own tasks" });
         // }
 
-        await TaskModel.findByIdAndDelete(id);
+        await taskModel.findByIdAndDelete(id);
 
-        const log = new LogModel({
-            createdby: Userid,
+        const log = new logModel({
+            createdBy: Userid,
             taskid: id,
-            oldstatus: task.Status,
-            newstatus: null,
+            oldStatus: task.status,
+            newStatus: null,
             action: "delete"
         });
         await log.save();

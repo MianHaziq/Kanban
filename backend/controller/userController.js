@@ -4,14 +4,14 @@ const bcrypt = require("bcrypt");
 
 const createUser = async (req, res, next) => {
     try {
-        const { Username, Password } = req.body; 
+        const { username, password } = req.body; 
 
-        if (!Username || !Password) {
+        if (!username || !password) {
             return res.status(400).json({ message: "username & password required" });
         }
 
-        const hashedPassword = await bcrypt.hash(Password, 10);
-        const newUser = new userModel({ Username, Password: hashedPassword });
+        const hashedpassword = await bcrypt.hash(password, 10);
+        const newUser = new userModel({ username, password: hashedpassword });
 
         
         await newUser.save();

@@ -1,9 +1,9 @@
-const LogModel = require("../models/logger");
+const logModel = require("../models/logger");
 
 
 const fetchLog = async (req, res, next) => {
     try {
-        const log = await LogModel.find().populate("createdby","Username");
+        const log = await logModel.find().populate("createdBy","username");
 
         if (log.length === 0) {
             return res.status(404).json({ message: "No Logs Found" });

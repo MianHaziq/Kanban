@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const LoggerSchema = new mongoose.Schema({
-  createdby:{
+  createdBy:{
       type:mongoose.Schema.Types.ObjectId,
       ref:'user', 
       required: true
@@ -12,13 +12,13 @@ const LoggerSchema = new mongoose.Schema({
     ref:'task', 
     required: true
 },
-oldstatus:{
+oldStatus:{
     type:String,
     enum: ["todo", "progress", "done"], 
     required: false
  },
 
-newstatus:{
+newStatus:{
     type:String,
     enum: ["todo", "progress", "done"] , 
     required: false
@@ -28,7 +28,7 @@ action:{
     enum: ["create", "update", "delete"] , 
     required: true
 },
-createdat:{
+createdAt:{
 type:Date,
 default:Date.now(), 
 required: true

@@ -5,7 +5,7 @@ function Log_Card({ log }) {
     <>
     <tr className="bg-slate-800 border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-slate-600 ">
       <th scope="row" className="px-6 py-4 font-medium text-white whitespace-nowrap dark:text-white">
-        {log.createdby.Username}
+       {log.createdBy.username}  
       </th>
       <td className="px-6 py-4">
         <span
@@ -15,9 +15,9 @@ function Log_Card({ log }) {
           {log.action}
         </span>
       </td>
-      <td className="px-6 py-4">{log.oldstatus}</td>
-      <td className="px-6 py-4">{log.newstatus}</td>
-      <td className="px-6 py-4">{new Date(log.createdat).toLocaleString()}</td>
+      <td className="px-6 py-4">{log.oldStatus}</td>
+      <td className="px-6 py-4">{log.newStatus}</td>
+      <td className="px-6 py-4">{new Date(log.createdAt).toLocaleString()}</td>
     </tr>
     </>
   );
