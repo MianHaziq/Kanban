@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Base_url = "http://localhost:3003/task/";
+const Base_url = "http://localhost:3003/task";
 
 export const fetchTasks = async (token) => {
   try {
@@ -17,12 +17,12 @@ export const fetchTasks = async (token) => {
 export const addOrUpdateTask = async (task, token, editTask) => {
   try {
     if (editTask) {
-      const response = await axios.patch(`${Base_url}update/${editTask._id}`, task, {
+      const response = await axios.patch(`${Base_url}/update/${editTask._id}`, task, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
     } else {
-      const response = await axios.post(`${Base_url}create/`, task, {
+      const response = await axios.post(`${Base_url}/create`, task, {
         headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
@@ -35,7 +35,7 @@ export const addOrUpdateTask = async (task, token, editTask) => {
 
 export const removeTask = async (taskId, token) => {
   try {
-    await axios.delete(`${Base_url}delete/${taskId}`, {
+    await axios.delete(`${Base_url}/delete/${taskId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   } catch (error) {
@@ -47,7 +47,7 @@ export const removeTask = async (taskId, token) => {
 export const updateTaskStatus = async (task, status, token) => {
   try {
     const updatedTask = { ...task, Status: status };
-    const response = await axios.patch(`${Base_url}update/${task._id}`, updatedTask, {
+    const response = await axios.patch(`${Base_url}/update/${task._id}`, updatedTask, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;

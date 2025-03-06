@@ -5,17 +5,17 @@ const AuthContext = createContext();
 function AuthProvider(props) {
   const [token, setToken] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    const jwtToken=localStorage.getItem('token');
-    if(jwtToken){
+    const jwtToken = localStorage.getItem('token');
+    if (jwtToken) {
       setToken(jwtToken);
     }
 
-  },[]);
+  }, []);
 
   const login = (jwtToken) => {
-    localStorage.setItem('token',jwtToken);
+    localStorage.setItem('token', jwtToken);
     setToken(jwtToken);
   };
 

@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { login } from "../services/authService";
 
 function Login() {
@@ -14,9 +14,10 @@ function Login() {
     try {
       const token = await login(username, password);
       authLogin(token);
+      alert("login successfully");
       navigate("/home");
     } catch (error) {
-      alert("Invalid credentials. Try again.");
+      alert("Invalid credentials  Try again!");
     }
   };
 
@@ -41,6 +42,7 @@ function Login() {
             <label className="block text-gray-700 font-semibold">Password</label>
             <input
               type="password"
+              minLength="6"
               placeholder="Enter Password"
               className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
               value={password}

@@ -21,7 +21,7 @@ oldstatus:{
 newstatus:{
     type:String,
     enum: ["todo", "progress", "done"] , 
-    required: true
+    required: false
 },
 action:{
     type:String,
