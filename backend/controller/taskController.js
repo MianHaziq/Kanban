@@ -8,14 +8,14 @@ const createTask = async (req, res, next) => {
             return res.status(400).json({ message: " All Inputs Required" });
         }
 
-        const Userid = req.user.id; 
+        const userId = req.user.id; 
 
-        const newTask = new taskModel({ title, description, status, Userid });
+        const newTask = new taskModel({ title, description, status, userId });
         await newTask.save();
 
         const log = new logModel({
-            createdBy: Userid,
-            taskid: newTask._id,
+            createdBy: userId,
+            taskId: newTask._id,
             oldStatus: null,
             newStatus: status,
             action: "create"
@@ -30,7 +30,7 @@ const createTask = async (req, res, next) => {
 
 const readTask = async (req, res, next) => {
     try {
-        const tasks = await taskModel.find().populate('Userid'); 
+        const tasks = await taskModel.find().populate('userId'); 
         res.status(200).json(tasks);
     } catch (error) {
         next(error);
@@ -40,7 +40,7 @@ const updateTask = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { title, description, status } = req.body;
-        const Userid = req.user.id; 
+        const userId = req.user.id; 
 
         const task = await taskModel.findById(id);
         if (!task) {
@@ -48,7 +48,7 @@ const updateTask = async (req, res, next) => {
         }
 
       
-        // if (task.Userid.toString() !== Userid) {
+        // if (task.userId.toString() !== userId) {
         //     return res.status(403).json({ message: " You can only update your own tasks" });
         // }
 
@@ -60,8 +60,8 @@ const updateTask = async (req, res, next) => {
 
         if (updatedTask) {
             const log = new logModel({
-                createdBy: Userid,
-                taskid: updatedTask._id,
+                createdBy: userId,
+                taskId: updatedTask._id,
                 oldStatus: task.status,
                 newStatus: status,
                 action: "update"
@@ -77,7 +77,7 @@ const updateTask = async (req, res, next) => {
 const deleteTask = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const Userid = req.user.id; 
+        const userId = req.user.id; 
 
         const task = await taskModel.findById(id);
         if (!task) {
@@ -85,15 +85,15 @@ const deleteTask = async (req, res, next) => {
         }
 
         
-        // if (task.Userid.toString() !== Userid) {
+        // if (task.userId.toString() !== userId) {
         //     return res.status(403).json({ message: "You can only delete your own tasks" });
         // }
 
         await taskModel.findByIdAndDelete(id);
 
         const log = new logModel({
-            createdBy: Userid,
-            taskid: id,
+            createdBy: userId,
+            taskId: id,
             oldStatus: task.status,
             newStatus: null,
             action: "delete"

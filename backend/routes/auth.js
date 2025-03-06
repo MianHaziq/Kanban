@@ -4,7 +4,7 @@ const{login,signup}=require('../controller/auth');
 
 
 router.post('/login',login)
-router.post('/Signup',signup)
+router.post('/signup',signup)
 
 
 module.exports=router;

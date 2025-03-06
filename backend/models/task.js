@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema({
         type: String,
          required: true,
           enum: ["todo", "progress", "done"] },
-Userid:{
+userId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'user',
     required:true
@@ -21,4 +21,4 @@ Userid:{
   
 });
 
-module.exports = mongoose.model("Task", taskSchema);
+module.exports = mongoose.model("task", taskSchema);

@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const LoggerSchema = new mongoose.Schema({
+const loggerSchema = new mongoose.Schema({
   createdBy:{
       type:mongoose.Schema.Types.ObjectId,
       ref:'user', 
       required: true
       
   },
-  taskid:{
+  taskId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:'task', 
     required: true
@@ -37,4 +37,4 @@ required: true
 
 });
 
-module.exports = mongoose.model("Log", LoggerSchema);
+module.exports = mongoose.model("log", loggerSchema);
